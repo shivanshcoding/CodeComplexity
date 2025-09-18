@@ -30,7 +30,7 @@ With a simple right-click → *Analyze Selected Code*, the extension sends the c
 ---
 
 ## 📂 Project Structure
-
+```tex
 CodeComplexity/
 │── extension/              # Chrome Extension files
 │   ├── manifest.json       # Extension manifest configuration
@@ -46,7 +46,7 @@ CodeComplexity/
 │   └── ...
 │
 └── README.md               # Project documentation
-
+```
 
 ---
 
