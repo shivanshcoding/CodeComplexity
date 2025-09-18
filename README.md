@@ -1,162 +1,141 @@
-# CodeComplexity
+# CodeComplexity 🔍
 
-A Chrome extension with a FastAPI backend that analyzes code snippets for time and space complexity using the Groq API.
+**CodeComplexity** is a Chrome extension + backend service that lets you analyze code snippets directly from websites like **LeetCode, Codeforces, etc.**  
+With a simple right-click → *Analyze Selected Code*, the extension sends the code to the backend, which uses **Groq’s LLM API** to provide detailed analysis and complexity insights.
 
-## Project Structure
+---
 
-```
+## ✨ Features
+
+- 📌 Right-click any selected code → *Analyze Selected Code*  
+- 🔗 Works on coding platforms like **LeetCode**  
+- 🤖 Powered by **Groq API** (`mixtral-8x7b-32768`)  
+- 📊 Provides complexity analysis and explanations in a popup  
+- ⚡ Fast, lightweight, and easy to use  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend (Extension)**  
+  - Chrome Extension (Manifest V3)  
+  - Context Menu API  
+  - Prism.js for syntax highlighting  
+
+- **Backend**  
+  - Python 3.9+  
+  - FastAPI + Uvicorn  
+  - Groq LLM API  
+
+---
+
+## 📂 Project Structure
+
 CodeComplexity/
-├── extension/                 # Chrome extension files
-│   ├── manifest.json          # Extension manifest
-│   ├── popup.html             # Popup UI
-│   ├── popup.js               # Popup functionality
-│   ├── content.js             # Content script for capturing selected code
-│   ├── background.js          # Background script for API communication
-│   ├── fullpage.html          # Full page analysis view
-│   ├── fullpage.js            # Full page functionality
-│   ├── styles.css             # Styling for the extension
-│   └── images/                # Extension icons
-│       ├── icon16.png
-│       ├── icon48.png
-│       └── icon128.png
-├── backend/                   # FastAPI backend
-│   ├── backend.py             # Main FastAPI server
-│   ├── system_prompt.py       # AI system prompt
-│   ├── requirements.txt       # Python dependencies
-│   └── .env                   # Environment variables (create this file)
-└── README.md                  # This file
+│── extension/ # Chrome Extension files
+│ ├── manifest.json
+│ ├── background.js
+│ ├── popup.html
+│ ├── popup.js
+│ └── libs/prism/ # Syntax highlighting
+│
+│── backend/ # Backend service
+│ ├── backend.py # FastAPI server
+│ ├── requirements.txt
+│ ├── .env.example # Example env file
+│ └── ...
+│
+└── README.md
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/yourusername/CodeComplexity.git
+cd CodeComplexity
 ```
 
-## Installation
+--- 
 
-### Prerequisites
+### 2. Backend Setup
+#### 1. Go to backend directory:
 
-- Python 3.8 or higher
-- Node.js and npm (for extension development)
-- Chrome browser
-- Groq API key (sign up at https://console.groq.com/)
 
-### Backend Setup
+```bash
+cd backend
+```
 
-1. Navigate to the backend directory:
-   ```
-   cd backend
-   ```
+#### 2. Create and activate a virtual environment:
 
-2. Create a virtual environment:
-   ```
-   python -m venv venv
-   ```
+```bash
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+```
+#### 3. Install dependencies:
 
-3. Activate the virtual environment:
-   - Windows:
-     ```
-     venv\Scripts\activate
-     ```
-   - macOS/Linux:
-     ```
-     source venv/bin/activate
-     ```
+```bash
+Copy code
+pip install -r requirements.txt
+```
+#### 4. Copy .env.example → .env and add your Groq API Key:
 
-4. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
+```ini
+Copy code
+GROQ_API_KEY=your_api_key_here
+```
 
-5. Create a `.env` file in the backend directory with your Groq API key:
-   ```
-   GROQ_API_KEY=your_groq_api_key_here
-   ```
+#### 5. Start the server:
 
-### Chrome Extension Setup
+```bash
+uvicorn backend:app --reload --port 5000
+```
+---
 
-1. Open Chrome and navigate to `chrome://extensions/`
-2. Enable "Developer mode" (toggle in the top-right corner)
-3. Click "Load unpacked" and select the `extension` directory from this project
-4. The CodeComplexity extension should now be installed and visible in your extensions list
+## 3. Chrome Extension Setup
 
-## Usage
+1. Open Chrome → `chrome://extensions/`  
+2. Enable **Developer Mode** (top-right).  
+3. Click **Load unpacked** and select the `extension/` folder.  
+4. You should now see the extension installed.  
 
-1. Start the backend server:
-   ```
-   cd backend
-   python backend.py
-   ```
-   The server will run at http://localhost:5000
+---
 
-2. Browse to a website with code snippets (like LeetCode, GeeksforGeeks, HackerRank)
-3. Select a code snippet on the page
-4. Right-click and select "Analyze Selected Code" from the context menu
-5. Click on the CodeComplexity extension icon to view the analysis results
-6. For a more detailed view, click "View Full Analysis" in the popup
+## 🚀 Usage
 
-## Deployment Options
+1. Open **LeetCode** or any coding platform.  
+2. Select the code you want to analyze.  
+3. Right-click → *Analyze Selected Code*.  
+4. A popup will show the complexity analysis.  
 
-### Backend Deployment
+---
 
-#### Local Development
-- Run the backend locally as described in the setup instructions
-- Ensure port 5000 is accessible
+## 🔑 Environment Variables
 
-#### Cloud Deployment
+The backend requires the following environment variable in `.env`:
+```ini
+GROQ_API_KEY=your_api_key_here
+```
+You can get your API key from [Groq Console](https://console.groq.com/).  
+---
 
-**Render**
-1. Sign up for a Render account at https://render.com
-2. Create a new Web Service
-3. Connect your GitHub repository
-4. Configure the service:
-   - Build Command: `pip install -r backend/requirements.txt`
-   - Start Command: `cd backend && uvicorn backend:app --host 0.0.0.0 --port $PORT`
-5. Add the environment variable `GROQ_API_KEY`
+## 🐛 Troubleshooting
 
-**Heroku**
-1. Sign up for a Heroku account at https://heroku.com
-2. Install the Heroku CLI and log in
-3. Create a new Heroku app:
-   ```
-   heroku create codecomplexity-backend
-   ```
-4. Set the Groq API key:
-   ```
-   heroku config:set GROQ_API_KEY=your_groq_api_key_here
-   ```
-5. Deploy the app:
-   ```
-   git push heroku main
-   ```
+- **Context menu not showing**  
+  Make sure the extension is reloaded in `chrome://extensions` after changes.  
 
-### Extension Deployment
+- **500 Internal Server Error**  
+  Check backend logs. Common issues:  
+  - Missing or invalid `GROQ_API_KEY`  
+  - Wrong model name (use `mixtral-8x7b-32768` or another supported model)  
 
-For personal use, the "Load unpacked" method described in the setup is sufficient.
+- **CORS issues**  
+  Ensure your backend allows requests from the extension.  
 
-For distribution:
-1. Create a `.zip` file of the extension directory
-2. Upload to the Chrome Web Store Developer Dashboard
-3. Follow the Chrome Web Store publishing process
+---
 
-## Testing Strategy
+## 📜 License
 
-### Backend Testing
-- Unit tests for the FastAPI endpoints using `pytest`
-- Integration tests for the Groq API communication
-- Error handling tests for various edge cases
-
-### Extension Testing
-- Manual testing on different websites with code snippets
-- Test with various programming languages (JavaScript, Python, Java, C++)
-- Test error handling when backend is unavailable
-- Test with large code snippets to ensure proper handling
-
-## Troubleshooting
-
-- **CORS Issues**: If you encounter CORS errors, ensure the backend CORS middleware is properly configured
-- **API Key Issues**: Verify your Groq API key is correctly set in the `.env` file
-- **Extension Not Working**: Check the browser console for errors and ensure the backend server is running
-
-## Future Enhancements
-
-- Support for more programming languages
-- Line-by-line analysis of code
-- Performance optimization suggestions with code examples
-- Integration with more coding platforms
-- User accounts to save analysis history
+MIT License © 2025 Shivansh Rana
