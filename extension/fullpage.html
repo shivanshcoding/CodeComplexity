@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeComplexity - Full Analysis</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="libs/prism/prism.css">
+  <style>
+    /* Additional styles for full page view */
+    body {
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+    }
+    
+    .container {
+      width: 100%;
+      max-height: none;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    
+    .result-card {
+      margin-bottom: 25px;
+    }
+    
+    pre {
+      max-height: 400px;
+    }
+    
+    .explanation-section {
+      line-height: 1.8;
+    }
+    
+    .complexity-badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    
+    .good {
+      background-color: #e6f7e6;
+      color: #2e7d32;
+    }
+    
+    .moderate {
+      background-color: #fff8e1;
+      color: #f57f17;
+    }
+    
+    .poor {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+    
+    .code-line {
+      display: flex;
+      margin-bottom: 2px;
+    }
+    
+    .line-number {
+      min-width: 40px;
+      color: #999;
+      text-align: right;
+      padding-right: 10px;
+      user-select: none;
+    }
+    
+    .line-content {
+      flex: 1;
+    }
+    
+    .highlighted {
+      background-color: rgba(255, 213, 79, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CodeComplexity</h1>
+      <p class="subtitle">Detailed Code Analysis</p>
+    </header>
+    
+    <div id="loading" class="hidden">
+      <div class="spinner"></div>
+      <p>Loading analysis...</p>
+    </div>
+    
+    <div id="no-analysis" class="message-box">
+      <p>No analysis available. Select code on a webpage and use the right-click menu to analyze it.</p>
+    </div>
+    
+    <div id="error-message" class="message-box hidden">
+      <p>An error occurred during analysis. Please try again.</p>
+    </div>
+    
+    <div id="results" class="hidden">
+      <div class="result-card">
+        <h2>Complexity Summary</h2>
+        <div class="complexity-summary">
+          <div>
+            <strong>Time Complexity:</strong> 
+            <span id="time-complexity">-</span>
+            <span id="time-complexity-badge" class="complexity-badge"></span>
+          </div>
+          <div>
+            <strong>Space Complexity:</strong> 
+            <span id="space-complexity">-</span>
+            <span id="space-complexity-badge" class="complexity-badge"></span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="result-card">
+        <h2>Code Analysis</h2>
+        <div id="code-with-line-numbers"></div>
+      </div>
+      
+      <div class="result-card">
+        <h2>Suggested Improvements</h2>
+        <ul id="improvements"></ul>
+      </div>
+      
+      <div class="result-card">
+        <h2>Detailed Explanation</h2>
+        <div id="explanation" class="explanation-section"></div>
+      </div>
+      
+      <div class="button-container">
+        <button id="copy-button">Copy Analysis</button>
+        <button id="back-button">Back to Popup</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="libs/prism/prism.js"></script>
+  <script src="libs/prism/prism-javascript.js"></script>
+  <script src="libs/prism/prism-python.js"></script>
+  <script src="libs/prism/prism-java.js"></script>
+  <script src="libs/prism/prism-cpp.js"></script>
+  <script src="fullpage.js"></script>
+</body>
+</html>

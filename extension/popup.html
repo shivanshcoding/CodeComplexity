@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeComplexity</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="libs/prism/prism.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CodeComplexity</h1>
+      <p class="subtitle">Code Analysis Results</p>
+    </header>
+    
+    <div id="loading" class="hidden">
+      <div class="spinner"></div>
+      <p>Analyzing code...</p>
+    </div>
+    
+    <div id="no-analysis" class="message-box">
+      <p>No analysis available. Select code on a webpage and use the right-click menu to analyze it.</p>
+    </div>
+    
+    <div id="error-message" class="message-box hidden">
+      <p>An error occurred during analysis. Please try again.</p>
+    </div>
+    
+    <div id="results" class="hidden">
+      <div class="result-card">
+        <h2>Time Complexity</h2>
+        <p id="time-complexity">-</p>
+      </div>
+      
+      <div class="result-card">
+        <h2>Space Complexity</h2>
+        <p id="space-complexity">-</p>
+      </div>
+      
+      <div class="result-card">
+        <h2>Code Snippet</h2>
+        <pre><code id="code-snippet" class="language-javascript"></code></pre>
+      </div>
+      
+      <div class="result-card">
+        <h2>Improvements</h2>
+        <ul id="improvements"></ul>
+      </div>
+      
+      <div class="result-card">
+        <h2>Explanation</h2>
+        <p id="explanation"></p>
+      </div>
+      
+      <div class="button-container">
+        <button id="copy-button">Copy Analysis</button>
+        <button id="view-full-button">View Full Analysis</button>
+      </div>
+    </div>
+
+    <!-- Example code blocks with correct language classes -->
+    <div class="examples">
+      <h3>C++ Example</h3>
+      <pre><code class="language-cpp">
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+      </code></pre>
+
+      <h3>Python Example</h3>
+      <pre><code class="language-python">
+def greet():
+    print("Hello, World!")
+    
+if __name__ == "__main__":
+    greet()
+      </code></pre>
+
+      <h3>JavaScript Example</h3>
+      <pre><code class="language-javascript">
+function greet() {
+    console.log("Hello, World!");
+}
+
+greet();
+      </code></pre>
+    </div>
+  </div>
+  
+  <!-- Scripts - Load in correct order -->
+  <!-- 1. Core library first -->
+  <script src="libs/prism/prism.js"></script>
+  
+  <!-- 2. Common language definitions -->
+  <script src="libs/prism/prism-clike.js"></script>
+  
+  <!-- 3. C before C++ -->
+  <script src="libs/prism/prism-c.js"></script>
+  
+  <!-- 4. Other language components -->
+  <script src="libs/prism/prism-cpp.js"></script>
+  <script src="libs/prism/prism-javascript.js"></script>
+  <script src="libs/prism/prism-python.js"></script>
+  <script src="libs/prism/prism-java.js"></script>
+  
+  <!-- 5. Your application code last -->
+  <script src="popup.js"></script>
+</body>
+</html>
