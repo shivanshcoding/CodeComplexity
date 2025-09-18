@@ -32,20 +32,21 @@ With a simple right-click → *Analyze Selected Code*, the extension sends the c
 ## 📂 Project Structure
 
 CodeComplexity/
-│── extension/ # Chrome Extension files
-│ ├── manifest.json
-│ ├── background.js
-│ ├── popup.html
-│ ├── popup.js
-│ └── libs/prism/ # Syntax highlighting
+│── extension/              # Chrome Extension files
+│   ├── manifest.json       # Extension manifest configuration
+│   ├── background.js       # Handles context menu & API calls
+│   ├── popup.html          # UI for analysis results
+│   ├── popup.js            # Frontend logic for popup
+│   └── libs/prism/         # Syntax highlighting library
 │
-│── backend/ # Backend service
-│ ├── backend.py # FastAPI server
-│ ├── requirements.txt
-│ ├── .env.example # Example env file
-│ └── ...
+│── backend/                # Backend service (FastAPI)
+│   ├── backend.py          # FastAPI server handling analysis
+│   ├── requirements.txt    # Python dependencies
+│   ├── .env.example        # Example environment variables
+│   └── ...
 │
-└── README.md
+└── README.md               # Project documentation
+
 
 ---
 
