@@ -109,8 +109,8 @@ def _has_required_sections(text: str) -> bool:
 async def analyze_code(payload: CodeRequest):
     code = (payload.code or "").strip()
 
-    if len(code) < 50:
-        raise HTTPException(status_code=400, detail="Provide a code snippet of at least 50 characters")
+    if len(code) < 20:
+        raise HTTPException(status_code=400, detail="Provide a code snippet of at least 20 characters")
 
     # Prevent excessively large payloads
     MAX_LEN = 20000

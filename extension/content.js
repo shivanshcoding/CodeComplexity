@@ -3,7 +3,7 @@
   let lastSent = '';
 
   function isCodeLike(text) {
-    if (!text || text.length < 50) return false;
+    if (!text || text.length < 20) return false;
     const hasSymbols = /[{}()\[\]=;<>]/.test(text);
     return hasSymbols;
   }
