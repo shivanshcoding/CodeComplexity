@@ -1,35 +1,25 @@
 {
   "manifest_version": 3,
   "name": "CodeComplexity",
-  "version": "1.0",
-  "description": "Analyze code snippets for time and space complexity",
-  "permissions": [
-    "contextMenus",
-    "storage",
-    "activeTab",
-    "scripting"
-  ],
-  "host_permissions": [
-    "http://localhost:5000/*",
-    "https://leetcode.com/*",
-    "<all_urls>"
-  ],
+  "version": "0.1.0",
+  "description": "Analyze selected code complexity using a side panel and FastAPI+Groq backend.",
+  "permissions": ["activeTab", "storage", "scripting", "sidePanel"],
+  "host_permissions": ["<all_urls>", "http://127.0.0.1:5000/*"],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": "images/icon.svg"
+    "default_title": "CodeComplexity"
   },
-  "icons": {
-    "16": "images/icon.svg",
-    "48": "images/icon.svg",
-    "128": "images/icon.svg"
+  "side_panel": {
+    "default_path": "sidepanel.html"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
     }
   ]
 }

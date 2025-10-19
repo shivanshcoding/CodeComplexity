@@ -1,21 +1,29 @@
-// Listen for messages from the background script
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.action === "getSelectedText") {
-    const selectedText = window.getSelection().toString();
-    sendResponse({selectedText: selectedText});
-  }
-});
+// Content script: detect selected code-like text and notify background
+(function () {
+  let lastSent = '';
 
-// Add a message listener to handle custom events from the page
-window.addEventListener('message', function(event) {
-  // Only accept messages from the same frame
-  if (event.source !== window) return;
-
-  // Check if the message is from a code editor (like CodeMirror used by many coding sites)
-  if (event.data.type && event.data.type === 'codeSelected') {
-    chrome.runtime.sendMessage({
-      action: 'codeSelected',
-      code: event.data.code
-    });
+  function isCodeLike(text) {
+    if (!text || text.length < 50) return false;
+    const hasSymbols = /[{}()\[\]=;<>]/.test(text);
+    return hasSymbols;
   }
-}, false);
+
+  function getSelectionText() {
+    try {
+      const sel = window.getSelection();
+      return sel ? String(sel.toString()) : '';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function handleMouseUp() {
+    const text = getSelectionText().trim();
+    if (!isCodeLike(text)) return;
+    if (text === lastSent) return;
+    lastSent = text;
+    chrome.runtime.sendMessage({ action: 'code-selected', code: text });
+  }
+
+  window.addEventListener('mouseup', handleMouseUp, { passive: true });
+})();

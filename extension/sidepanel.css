@@ -1,0 +1,91 @@
+/* Futuristic, glassmorphism + neon aesthetic */
+:root {
+  color-scheme: dark;
+  --bg: #0b0f17;
+  --bg-grad-1: #0b0f17;
+  --bg-grad-2: #0f1630;
+  --card: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.12);
+  --text: #e6ecff;
+  --muted: #9aa7c7;
+  --accent: #7ee7ff;
+  --accent-2: #8a7dff;
+  --glow: 0 0 40px rgba(126, 231, 255, 0.25), 0 0 16px rgba(138, 125, 255, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0; padding: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 800px at 100% -10%, rgba(138,125,255,0.12), transparent 40%),
+              radial-gradient(1000px 700px at -10% 110%, rgba(126,231,255,0.10), transparent 40%),
+              linear-gradient(160deg, var(--bg-grad-1), var(--bg-grad-2));
+  min-height: 100vh;
+}
+
+header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
+  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 2;
+  font-weight: 650; letter-spacing: 0.3px;
+}
+
+main {
+  padding: 14px; display: flex; flex-direction: column; gap: 14px;
+}
+
+.glass {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid var(--border);
+  /* border-radius: 2px; */
+  padding: 12px;
+  box-shadow: var(--glow);
+  overflow: hidden;
+}
+
+.glass::before {
+  content: "";
+  position: absolute; inset: -1px; border-radius: 14px;
+  padding: 1px;
+  background: conic-gradient(from 0deg, rgba(126,231,255,0.5), rgba(138,125,255,0.5), rgba(126,231,255,0.5));
+  -webkit-mask: linear-gradient(#0000, #0000), linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none; opacity: 0.25;
+}
+
+h2 { margin: 0 0 10px 0; font-size: 13px; color: var(--accent); letter-spacing: 0.4px; }
+
+#analysis h1, #analysis h2, #analysis h3 { margin: 0.6em 0 0.4em; }
+#analysis h1 { font-size: 18px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#analysis h2 { font-size: 15px; color: var(--accent); }
+#analysis h3 { font-size: 13px; color: #cdd7ff; }
+#analysis p { margin: 0.35em 0; color: var(--text); }
+#analysis ul { margin: 0.4em 0 0.4em 1.2em; }
+
+.muted { color: var(--muted); font-size: 12px; margin-top: 8px; }
+
+.code-shell {
+  position: relative; margin: 0; max-height: 280px; overflow: auto; border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(126,231,255,0.18);
+  box-shadow: inset 0 0 0 1px rgba(138,125,255,0.08), inset 0 0 24px rgba(126,231,255,0.05);
+}
+
+/* Loading shimmer */
+#loading { display: none; padding: 10px; border-radius: 10px; margin-bottom: 8px; color: #cfe9ff; }
+#loading.active { display: block; }
+.shimmer.active {
+  background: linear-gradient(90deg, rgba(126,231,255,0.08) 25%, rgba(138,125,255,0.18) 37%, rgba(126,231,255,0.08) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 2.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}

@@ -1,0 +1,20 @@
+/* Futuristic dark neon Prism theme */
+code[class*="language-"], pre[class*="language-"] {
+  color: #e6ecff; background: transparent; text-shadow: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px; line-height: 1.5;
+}
+pre[class*="language-"] { padding: 12px; margin: 0; overflow: auto; }
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6b7a99; }
+.token.punctuation { color: #a7b3d9; }
+.token.namespace { opacity: .8; }
+.token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol { color: #7ee7ff; }
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #7dffa3; }
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: #ffd17e; }
+.token.atrule, .token.attr-value, .token.keyword { color: #8a7dff; }
+.token.function, .token.class-name { color: #ff9df5; }
+.token.regex, .token.important, .token.variable { color: #ff7e7e; }
+.token.deleted { color: #ff7e7e; }
+.token.bold { font-weight: 700; }
+.token.italic { font-style: italic; }
+.token.entity { cursor: help; }
